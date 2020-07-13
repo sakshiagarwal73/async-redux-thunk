@@ -1,5 +1,7 @@
-import React from 'react';
+
 import jsonplaceholder from '../apis/jsonplaceholder';
+
+//function returning a function
 
 const fetchPosts =  () =>
 {
@@ -10,7 +12,7 @@ const fetchPosts =  () =>
 	    
 	  dispatch({
 		  type:'FETCH_POSTS',
-		  payload : response
+		  payload : response.data
 	  });
 	};
 };
