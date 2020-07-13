@@ -1,10 +1,17 @@
 import React from 'react';
+import jsonplaceholder from '../apis/jsonplaceholder';
 
-const fetchPosts = () =>
+const fetchPosts =  () =>
 {
-	return 
+	return async function(dispatch,getState)
 	{
-		type:'FETCH_POSTS'
+		const response = await jsonplaceholder.get('/posts');
+
+	    
+	  dispatch({
+		  type:'FETCH_POSTS',
+		  payload : response
+	  });
 	};
 };
 
