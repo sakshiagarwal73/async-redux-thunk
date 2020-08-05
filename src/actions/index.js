@@ -1,9 +1,9 @@
 
 import jsonplaceholder from '../apis/jsonplaceholder';
-
+import _ from 'lodash';
 //function returning a function
 
-const fetchPosts =  () =>
+export const fetchPosts =  () =>
 {
 	return async function(dispatch,getState)
 	{
@@ -17,4 +17,22 @@ const fetchPosts =  () =>
 	};
 };
 
-export default fetchPosts;
+//pass id of user we want to fetch
+export const fetchUser = (id) => {
+  
+   return(function(dispatch,getState)
+  {
+  	 _fetchUser(id,dispatch);
+  });
+
+}
+
+const _fetchUser = _.memoize(async (id,dispatch) =>  {
+	const response = await jsonplaceholder.get(`/users/${id}`);
+
+  	 dispatch({
+  	 	type: 'FETCH_USER',
+  	 	payload : response.data
+  	 });
+});
+
